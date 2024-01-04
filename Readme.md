@@ -1,6 +1,8 @@
 <div align="center">
   <img height="100" src="assets/logo.png"/>
   <h2> TUI monitoring tool (top like) for Nvidia jetson boards </h2>
+  <img src="https://github.com/pythops/tegratop/assets/57548585/69663d3a-53df-4f3f-a89e-3ed4b1a1dca7"/>
+
 </div>
 
 ## 🚀 Installation
