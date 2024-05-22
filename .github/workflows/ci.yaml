@@ -20,7 +20,7 @@ jobs:
       - name: Install the dependencies
         run: |
           sudo apt update && \
-          sudo apt install -y podman && \
+          sudo apt install -y podman binutils-aarch64-linux-gnu musl-tools && \
           cargo binstall --no-confirm cross
 
       - name: Linting
@@ -29,4 +29,4 @@ jobs:
           cargo fmt --all -- --check
 
       - name: Debug builds
-        run: cross build --target=aarch64-unknown-linux-gnu
+        run: cross build --target=aarch64-unknown-linux-musl
