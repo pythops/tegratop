@@ -64,9 +64,20 @@ impl Thermal {
                         };
 
                         let temperature_path = &entry_path.join("temp");
-                        let mut temperature_file = File::open(temperature_path)?;
+                        let mut temperature_file = match File::open(temperature_path) {
+                            Ok(f) => f,
+                            Err(e) => {
+                                error!("{}", e);
+                                continue;
+                            }
+                        };
+
                         let mut buffer = String::new();
-                        temperature_file.read_to_string(&mut buffer)?;
+                        if let Err(e) = temperature_file.read_to_string(&mut buffer) {
+                            error!("{}", e);
+                            continue;
+                        }
+
                         let temperature = buffer.trim().parse::<f32>()? / 1000.0;
 
                         let sensor = Sensor {
