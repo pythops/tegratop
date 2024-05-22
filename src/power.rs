@@ -267,21 +267,20 @@ impl Power {
         };
 
         // nvpmodel
-
-        let nvpmodel = Table::new(
-            [Row::new(vec![
-                Cell::new("Mode").style(Style::default().bold()),
-                Cell::new(match &self.nvpmode {
-                    Some(nvpmode) => match &nvpmode.mode {
-                        Some(mode) => format!("{}W", &mode.name),
-                        None => " - ".to_string(),
-                    },
+        let rows = [Row::new(vec![
+            Cell::new("Mode").style(Style::default().bold()),
+            Cell::new(match &self.nvpmode {
+                Some(nvpmode) => match &nvpmode.mode {
+                    Some(mode) => format!("{}W", &mode.name),
                     None => " - ".to_string(),
-                }),
-            ])],
-            [Constraint::Length(16), Constraint::Length(6)],
-        )
-        .block(Block::default());
+                },
+                None => " - ".to_string(),
+            }),
+        ])];
+
+        let widths = [Constraint::Length(16), Constraint::Length(7)];
+
+        let nvpmodel = Table::new(rows, widths).block(Block::default());
 
         // Power consumption
         let rows: Vec<Row> = self

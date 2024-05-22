@@ -19,6 +19,7 @@ impl Tracing {
 
         let log_file = OpenOptions::new()
             .create(true)
+            .truncate(true)
             .write(true)
             .open(log_file_path)?;
 

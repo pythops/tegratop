@@ -157,7 +157,7 @@ impl System {
             ]),
         ];
 
-        let widths = [Constraint::Length(10), Constraint::Length(30)];
+        let widths = [Constraint::Length(10), Constraint::Fill(1)];
 
         let system = Table::new(rows, widths).block(
             Block::default()

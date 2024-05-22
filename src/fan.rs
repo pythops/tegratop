@@ -185,7 +185,7 @@ impl Fan {
             },
         ])];
 
-        let widths = [Constraint::Length(10), Constraint::Length(10)];
+        let widths = [Constraint::Length(10), Constraint::Fill(1)];
 
         let fan = Table::new(rows, widths)
             .header(Row::new(vec!["Profile", "RPM"]).style(Style::new().bold()))

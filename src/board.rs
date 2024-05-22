@@ -80,7 +80,7 @@ impl Board {
             ]),
         ];
 
-        let widths = [Constraint::Length(6), Constraint::Length(30)];
+        let widths = [Constraint::Length(6), Constraint::Fill(1)];
 
         let board = Table::new(rows, widths).block(
             Block::default()
