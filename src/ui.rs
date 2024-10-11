@@ -46,7 +46,7 @@ pub fn render(app: &mut App, frame: &mut Frame) {
                 ]
                 .as_ref(),
             )
-            .split(frame.size());
+            .split(frame.area());
         (
             chunks[0], chunks[1], chunks[2], chunks[3], chunks[4], chunks[5], chunks[6], chunks[7],
             chunks[8],

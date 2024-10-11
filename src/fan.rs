@@ -1,5 +1,5 @@
 use anyhow::Context;
-use tracing::error;
+use log::error;
 
 use anyhow::Result;
 use std::{

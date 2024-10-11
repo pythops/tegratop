@@ -1,4 +1,5 @@
 use anyhow::{Context, Result};
+use log::error;
 use ratatui::{
     layout::{Constraint, Direction, Layout, Rect},
     style::{Style, Stylize},
@@ -6,7 +7,6 @@ use ratatui::{
     widgets::{Bar, BarChart, BarGroup, Block, Borders, Cell, Padding, Row, Table},
     Frame,
 };
-use tracing::error;
 
 use std::{
     fs::{self, File},

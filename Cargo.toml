@@ -1,22 +1,25 @@
 [package]
 name = "tegratop"
 version = "0.2.0"
-authors = ["pythops <contact@pythops.com>"]
+authors = ["Badr Badri <contact@pythops.com>"]
 license = "GPL-3.0"
 edition = "2021"
-description = "TUI monitoring tool (top like) for Nvidia jetson boards"
+description = "TUI for monitoring Nvidia jetson boards"
 readme = "Readme.md"
 homepage = "https://github.com/pythops/tegratop"
 repository = "https://github.com/pythops/tegratop"
 
 [dependencies]
-crossterm = "0.27"
-ratatui = "0.26"
+ratatui = "0.28"
 strum = { version = "0.26", features = ["derive"] }
 strum_macros = "0.26"
 regex = "1"
 libc = "0.2"
 anyhow = "1"
-tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-tracing-error = "0.2"
+log = "0.4"
+env_logger = "0.11"
+
+[profile.release]
+lto = "fat"
+strip = true
+codegen-units = 1

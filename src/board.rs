@@ -1,12 +1,12 @@
+use log::error;
 use std::{fs, path::Path};
-use tracing::error;
 
 use anyhow::{Context, Result};
 
 use ratatui::{
     layout::{Constraint, Rect},
     style::{Style, Stylize},
-    widgets::{Block, Borders, Cell, Padding, Row, Table},
+    widgets::{Block, BorderType, Borders, Cell, Padding, Row, Table},
     Frame,
 };
 use regex::Regex;
@@ -85,6 +85,7 @@ impl Board {
         let board = Table::new(rows, widths).block(
             Block::default()
                 .borders(Borders::ALL)
+                .border_type(BorderType::Rounded)
                 .title("Board")
                 .padding(Padding::horizontal(1))
                 .title_style(Style::new().bold()),

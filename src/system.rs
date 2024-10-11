@@ -1,8 +1,8 @@
 use anyhow::Context;
+use log::error;
 use std::fs::File;
 use std::io::Read;
 use std::io::Seek;
-use tracing::error;
 
 use anyhow::Result;
 

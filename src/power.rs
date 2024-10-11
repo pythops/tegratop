@@ -1,9 +1,9 @@
 use anyhow::{Context, Result};
+use log::error;
 use std::{
     fs::{self, File},
     io::{Read, Seek},
 };
-use tracing::error;
 
 use ratatui::{
     layout::{Constraint, Direction, Layout, Rect},

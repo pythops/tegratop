@@ -1,4 +1,5 @@
 use anyhow::{Context, Result};
+use log::error;
 use ratatui::{
     layout::{Constraint, Direction, Layout, Rect},
     style::{Style, Stylize},
@@ -10,7 +11,6 @@ use std::{
     fs::{self, File},
     io::{Read, Seek},
 };
-use tracing::error;
 
 #[derive(Debug, Default)]
 pub struct GPU {

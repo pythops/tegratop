@@ -1,6 +1,5 @@
-use tracing::error;
-
 use anyhow::{Context, Result};
+use log::error;
 use std::{
     fs::File,
     io::{Read, Seek},

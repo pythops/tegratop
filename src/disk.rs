@@ -1,10 +1,10 @@
 use anyhow::Context;
 use anyhow::Result;
 
+use log::error;
 use std::fs::File;
 use std::io::Read;
 use std::io::Seek;
-use tracing::error;
 
 use std::{ffi::CString, fs};
 

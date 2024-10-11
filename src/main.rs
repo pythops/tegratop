@@ -1,18 +1,18 @@
-use ratatui::backend::CrosstermBackend;
-use ratatui::Terminal;
+use ratatui::{backend::CrosstermBackend, Terminal};
 use std::io;
-use tegratop::app::{App, AppResult};
-use tegratop::event::{Event, EventHandler};
-use tegratop::handler::handle_key_events;
-use tegratop::tracing::Tracing;
-use tegratop::tui::Tui;
+use tegratop::{
+    app::{App, AppResult},
+    event::{Event, EventHandler},
+    handler::handle_key_events,
+    tui::Tui,
+};
 
 fn main() -> AppResult<()> {
-    Tracing::init()?;
+    env_logger::init();
 
     let mut app = App::new();
 
-    let backend = CrosstermBackend::new(io::stderr());
+    let backend = CrosstermBackend::new(io::stdout());
     let terminal = Terminal::new(backend)?;
     let events = EventHandler::new(1_000);
     let mut tui = Tui::new(terminal, events);
