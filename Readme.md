@@ -1,6 +1,6 @@
 <div align="center">
   <img height="100" src="assets/logo.png"/>
-  <h2> TUI monitoring tool (top like) for Nvidia jetson boards </h2>
+  <h2> TUI for monitoring Nvidia jetson boards </h2>
   <img src="https://github.com/pythops/tegratop/assets/57548585/69663d3a-53df-4f3f-a89e-3ed4b1a1dca7"/>
 
 </div>
@@ -32,12 +32,6 @@ Run the following command:
 cargo build --release
 ```
 
-Then run `strip` to reduce the size of the binary
-
-```shell
-strip target/aarch64-unknown-linux-gnu/release/tegratop
-```
-
 This will produce an executable file at `target/release/tegratop` that you can copy to a directory in your `$PATH`.
 
 #### Cross compilation
@@ -46,18 +40,11 @@ Make sure you have those dependencies installed:
 
 - [cross](https://github.com/cross-rs/cross)
 - [podman](https://github.com/containers/podman)
-- [aarch64-linux-gnu-strip ](https://command-not-found.com/aarch64-linux-gnu-strip)
 
 then run the following command to build:
 
 ```shell
 CROSS_CONTAINER_ENGINE=podman cross build --target=aarch64-unknown-linux-gnu --release
-```
-
-Finally, run `strip` to reduce the size of the binary
-
-```
-aarch64-linux-gnu-strip target/aarch64-unknown-linux-gnu/release/tegratop
 ```
 
 ## 🪄 Usage
@@ -67,8 +54,6 @@ run `tegratop` with sudo to get full the stats, otherwise some information might
 ```
 $ sudo tegratop
 ```
-
-ℹ️ If certain information is not displayed, you can check the file `/tmp/tegratop.log`
 
 ## ⚖️ License
 
