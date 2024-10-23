@@ -1,6 +1,6 @@
 [package]
 name = "tegratop"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Badr Badri <contact@pythops.com>"]
 license = "GPL-3.0"
 edition = "2021"
@@ -10,7 +10,7 @@ homepage = "https://github.com/pythops/tegratop"
 repository = "https://github.com/pythops/tegratop"
 
 [dependencies]
-ratatui = "0.28"
+ratatui = "0.29"
 strum = { version = "0.26", features = ["derive"] }
 strum_macros = "0.26"
 regex = "1"
