@@ -3,7 +3,7 @@ name = "tegratop"
 version = "0.2.1"
 authors = ["Badr Badri <contact@pythops.com>"]
 license = "GPL-3.0"
-edition = "2021"
+edition = "2024"
 description = "TUI for monitoring Nvidia jetson boards"
 readme = "Readme.md"
 homepage = "https://github.com/pythops/tegratop"
@@ -11,8 +11,8 @@ repository = "https://github.com/pythops/tegratop"
 
 [dependencies]
 ratatui = "0.29"
-strum = { version = "0.26", features = ["derive"] }
-strum_macros = "0.26"
+strum = { version = "0.27", features = ["derive"] }
+strum_macros = "0.27"
 regex = "1"
 libc = "0.2"
 anyhow = "1"
