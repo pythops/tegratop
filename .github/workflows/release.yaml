@@ -32,10 +32,8 @@ jobs:
           aarch64-linux-gnu-strip tegratop-linux-arm64
 
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           body: |
             [Release.md](${{ github.server_url }}/${{ github.repository }}/blob/master/Release.md)
           files: "tegratop*"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
