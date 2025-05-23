@@ -4,10 +4,10 @@ use std::{fs, path::Path};
 use anyhow::{Context, Result};
 
 use ratatui::{
+    Frame,
     layout::{Constraint, Rect},
     style::{Style, Stylize},
     widgets::{Block, BorderType, Borders, Cell, Padding, Row, Table},
-    Frame,
 };
 use regex::Regex;
 

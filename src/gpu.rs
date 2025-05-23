@@ -1,11 +1,11 @@
 use anyhow::{Context, Result};
 use log::error;
 use ratatui::{
+    Frame,
     layout::{Constraint, Direction, Layout, Rect},
     style::{Style, Stylize},
     text::Line,
     widgets::{Bar, BarChart, BarGroup, Block, Borders, Cell, Padding, Row, Table},
-    Frame,
 };
 use std::{
     fs::{self, File},

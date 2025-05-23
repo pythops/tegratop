@@ -3,11 +3,11 @@ use crate::{
     event::EventHandler,
     ui,
 };
+use ratatui::Terminal;
 use ratatui::crossterm::{
     event::DisableMouseCapture,
     terminal::{self, LeaveAlternateScreen},
 };
-use ratatui::Terminal;
 use ratatui::{
     backend::Backend,
     crossterm::{event::EnableMouseCapture, terminal::EnterAlternateScreen},

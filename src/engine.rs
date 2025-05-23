@@ -1,8 +1,8 @@
 use ratatui::{
+    Frame,
     layout::{Constraint, Direction, Layout, Rect},
     style::{Style, Stylize},
     widgets::{Block, Borders, Padding, Row, Table},
-    Frame,
 };
 use std::fs;
 use std::path::Path;

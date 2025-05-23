@@ -7,10 +7,10 @@ use std::io::Seek;
 use anyhow::Result;
 
 use ratatui::{
+    Frame,
     layout::{Constraint, Rect},
     style::{Style, Stylize},
     widgets::{Block, Borders, Cell, Padding, Row, Table},
-    Frame,
 };
 
 #[derive(Debug, Default)]

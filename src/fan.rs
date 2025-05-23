@@ -9,10 +9,10 @@ use std::{
 use strum_macros::Display;
 
 use ratatui::{
+    Frame,
     layout::{Constraint, Rect},
     style::{Style, Stylize},
     widgets::{Block, Borders, Padding, Row, Table},
-    Frame,
 };
 
 #[derive(Debug, Default)]
@@ -93,19 +93,19 @@ impl FanProfile {
                         return Ok(Some(FanProfile {
                             file,
                             value: Profile::Quiet,
-                        }))
+                        }));
                     }
                     "cool" => {
                         return Ok(Some(FanProfile {
                             file,
                             value: Profile::Cool,
-                        }))
+                        }));
                     }
                     _ => {
                         return Ok(Some(FanProfile {
                             file,
                             value: Profile::Unknown,
-                        }))
+                        }));
                     }
                 }
             }

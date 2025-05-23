@@ -9,10 +9,10 @@ use std::io::Seek;
 use std::{ffi::CString, fs};
 
 use ratatui::{
+    Frame,
     layout::{Constraint, Rect},
     style::{Style, Stylize},
     widgets::{Block, Borders, Padding, Row, Table},
-    Frame,
 };
 
 #[derive(Debug, Default)]

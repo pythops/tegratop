@@ -1,4 +1,4 @@
-use ratatui::{backend::CrosstermBackend, Terminal};
+use ratatui::{Terminal, backend::CrosstermBackend};
 use std::io;
 use tegratop::{
     app::{App, AppResult},

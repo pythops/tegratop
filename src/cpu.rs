@@ -7,11 +7,11 @@ use std::{
 };
 
 use ratatui::{
+    Frame,
     layout::{Constraint, Direction, Layout, Rect},
     style::{Style, Stylize},
     text::Line,
     widgets::{Bar, BarChart, BarGroup, Block, Borders, Padding},
-    Frame,
 };
 
 #[derive(Debug, Default)]

@@ -2,10 +2,10 @@ use std::ffi::CStr;
 use std::net::Ipv4Addr;
 
 use ratatui::{
+    Frame,
     layout::{Constraint, Rect},
     style::{Style, Stylize},
     widgets::{Block, Borders, Padding, Row, Table},
-    Frame,
 };
 
 #[derive(Debug, Default)]

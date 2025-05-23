@@ -6,10 +6,10 @@ use std::{
 };
 
 use ratatui::{
+    Frame,
     layout::{Constraint, Direction, Layout, Rect},
     style::{Style, Stylize},
     widgets::{Block, Borders, Cell, Padding, Row, Table},
-    Frame,
 };
 use regex::Regex;
 
