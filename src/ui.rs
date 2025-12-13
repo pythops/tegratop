@@ -33,7 +33,7 @@ pub fn render(app: &mut App, frame: &mut Frame) {
             .direction(Direction::Vertical)
             .constraints(
                 [
-                    Constraint::Length(4),
+                    Constraint::Length(5),
                     Constraint::Length(cpu_block_length),
                     Constraint::Length(7),                   // memory
                     Constraint::Length(3),                   // gpu

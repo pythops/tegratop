@@ -15,6 +15,7 @@ use regex::Regex;
 pub struct Board {
     name: Option<String>,
     l4t: Option<String>,
+    bios: Option<String>,
 }
 
 impl Board {
@@ -42,6 +43,14 @@ impl Board {
         Ok(None)
     }
 
+    fn bios() -> Result<Option<String>> {
+        let path = Path::new("/sys/class/dmi/id/bios_version");
+        let buffer =
+            fs::read_to_string(path).context(format!("Failed to read from {}", path.display()))?;
+        let parts = buffer.split('-').next().map(|s| s.to_string());
+        Ok(parts)
+    }
+
     pub fn new() -> Self {
         let name = Board::name().map_or_else(
             |e| {
@@ -59,11 +68,19 @@ impl Board {
             }
         };
 
-        Self { name, l4t }
+        let bios = match Board::bios() {
+            Ok(v) => v,
+            Err(e) => {
+                error!("{}", e);
+                None
+            }
+        };
+
+        Self { name, l4t, bios }
     }
 
     pub fn render(&self, frame: &mut Frame, block: Rect) {
-        let rows: [Row; 2] = [
+        let rows: [Row; 3] = [
             Row::new(vec![
                 Cell::new("Name").style(Style::default().bold()),
                 Cell::new(match &self.name {
@@ -78,9 +95,16 @@ impl Board {
                     None => " - ",
                 }),
             ]),
+            Row::new(vec![
+                Cell::new("Firmware").style(Style::default().bold()),
+                Cell::new(match &self.bios {
+                    Some(v) => v,
+                    None => " - ",
+                }),
+            ]),
         ];
 
-        let widths = [Constraint::Length(6), Constraint::Fill(1)];
+        let widths = [Constraint::Length(10), Constraint::Fill(1)];
 
         let board = Table::new(rows, widths).block(
             Block::default()
