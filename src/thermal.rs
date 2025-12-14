@@ -55,39 +55,39 @@ impl Thermal {
             let entry = entry?;
             let entry_path = entry.path();
 
-            if let Some(file_name) = entry_path.file_name() {
-                if let Some(name) = file_name.to_str() {
-                    if name.starts_with("thermal_zone") && entry_path.is_dir() {
-                        let name = match fs::read_to_string(entry_path.join("type")) {
-                            Ok(v) => v.split('-').next().unwrap().trim().to_string(),
-                            Err(_) => continue,
-                        };
+            if let Some(file_name) = entry_path.file_name()
+                && let Some(name) = file_name.to_str()
+                && name.starts_with("thermal_zone")
+                && entry_path.is_dir()
+            {
+                let name = match fs::read_to_string(entry_path.join("type")) {
+                    Ok(v) => v.split('-').next().unwrap().trim().to_string(),
+                    Err(_) => continue,
+                };
 
-                        let temperature_path = &entry_path.join("temp");
-                        let mut temperature_file = match File::open(temperature_path) {
-                            Ok(f) => f,
-                            Err(e) => {
-                                error!("{}", e);
-                                continue;
-                            }
-                        };
-
-                        let mut buffer = String::new();
-                        if let Err(e) = temperature_file.read_to_string(&mut buffer) {
-                            error!("{}", e);
-                            continue;
-                        }
-
-                        let temperature = buffer.trim().parse::<f32>()? / 1000.0;
-
-                        let sensor = Sensor {
-                            file: temperature_file,
-                            name,
-                            temperature,
-                        };
-                        sensors.push(sensor);
+                let temperature_path = &entry_path.join("temp");
+                let mut temperature_file = match File::open(temperature_path) {
+                    Ok(f) => f,
+                    Err(e) => {
+                        error!("{}", e);
+                        continue;
                     }
+                };
+
+                let mut buffer = String::new();
+                if let Err(e) = temperature_file.read_to_string(&mut buffer) {
+                    error!("{}", e);
+                    continue;
                 }
+
+                let temperature = buffer.trim().parse::<f32>()? / 1000.0;
+
+                let sensor = Sensor {
+                    file: temperature_file,
+                    name,
+                    temperature,
+                };
+                sensors.push(sensor);
             }
         }
 

@@ -122,16 +122,16 @@ impl System {
     }
 
     pub fn refresh(&mut self) {
-        if let Some(load_avg) = &mut self.loadavg {
-            if let Err(e) = load_avg.refresh() {
-                error!("{}", e);
-            }
+        if let Some(load_avg) = &mut self.loadavg
+            && let Err(e) = load_avg.refresh()
+        {
+            error!("{}", e);
         };
 
-        if let Some(uptime) = &mut self.uptime {
-            if let Err(e) = uptime.refresh() {
-                error!("{}", e);
-            }
+        if let Some(uptime) = &mut self.uptime
+            && let Err(e) = uptime.refresh()
+        {
+            error!("{}", e);
         };
     }
 

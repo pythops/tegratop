@@ -220,16 +220,16 @@ impl Memory {
     }
 
     pub fn refresh(&mut self) {
-        if let Some(mem) = &mut self.mem {
-            if let Err(e) = mem.refresh() {
-                error!("{}", e);
-            }
+        if let Some(mem) = &mut self.mem
+            && let Err(e) = mem.refresh()
+        {
+            error!("{}", e);
         }
 
-        if let Some(emc) = &mut self.emc {
-            if let Err(e) = emc.refresh() {
-                error!("{}", e);
-            }
+        if let Some(emc) = &mut self.emc
+            && let Err(e) = emc.refresh()
+        {
+            error!("{}", e);
         }
     }
 

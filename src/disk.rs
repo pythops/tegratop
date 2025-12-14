@@ -181,10 +181,10 @@ impl Disk {
             self.space = stats;
         }
 
-        if let Some(device_name) = &self.device_name {
-            if let Some(io) = &mut self.io {
-                io.refresh(device_name).ok();
-            }
+        if let Some(device_name) = &self.device_name
+            && let Some(io) = &mut self.io
+        {
+            io.refresh(device_name).ok();
         }
     }
 

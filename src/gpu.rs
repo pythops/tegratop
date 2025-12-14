@@ -33,21 +33,20 @@ impl GPULoad {
 
         for entry in entries.flatten() {
             let path = entry.path();
-            if let Some(name) = path.file_name() {
-                if let Some(name_str) = name.to_str() {
-                    if gpu_names.iter().any(|gpu_name| name_str.contains(gpu_name)) {
-                        // Load
-                        let gpu_load_path = path.join("device/load");
-                        let mut file = File::open(&gpu_load_path)
-                            .context(format!("Failed to open {}", gpu_load_path.display()))?;
-                        let mut buffer = String::new();
-                        file.read_to_string(&mut buffer)?;
+            if let Some(name) = path.file_name()
+                && let Some(name_str) = name.to_str()
+                && gpu_names.iter().any(|gpu_name| name_str.contains(gpu_name))
+            {
+                // Load
+                let gpu_load_path = path.join("device/load");
+                let mut file = File::open(&gpu_load_path)
+                    .context(format!("Failed to open {}", gpu_load_path.display()))?;
+                let mut buffer = String::new();
+                file.read_to_string(&mut buffer)?;
 
-                        let load = (buffer.trim().parse::<f64>()? / 10.0).round();
+                let load = (buffer.trim().parse::<f64>()? / 10.0).round();
 
-                        return Ok(Some(GPULoad { file, load }));
-                    }
-                }
+                return Ok(Some(GPULoad { file, load }));
             }
         }
 
@@ -80,39 +79,36 @@ impl GPUFrequency {
 
         for entry in entries.flatten() {
             let path = entry.path();
-            if let Some(name) = path.file_name() {
-                if let Some(name_str) = name.to_str() {
-                    if gpu_names.iter().any(|gpu_name| name_str.contains(gpu_name)) {
-                        // Current freq
+            if let Some(name) = path.file_name()
+                && let Some(name_str) = name.to_str()
+                && gpu_names.iter().any(|gpu_name| name_str.contains(gpu_name))
+            {
+                // Current freq
 
-                        let current_frequency_path = path.join("cur_freq");
-                        let mut current_frequency_file = File::open(&current_frequency_path)
-                            .context(format!(
-                                "Failed to open {}",
-                                current_frequency_path.display()
-                            ))?;
-                        let mut buffer = String::new();
-                        current_frequency_file.read_to_string(&mut buffer)?;
-                        let current_frequency = buffer.trim().parse::<usize>()? / 1_000_000;
+                let current_frequency_path = path.join("cur_freq");
+                let mut current_frequency_file = File::open(&current_frequency_path).context(
+                    format!("Failed to open {}", current_frequency_path.display()),
+                )?;
+                let mut buffer = String::new();
+                current_frequency_file.read_to_string(&mut buffer)?;
+                let current_frequency = buffer.trim().parse::<usize>()? / 1_000_000;
 
-                        // Max freq
+                // Max freq
 
-                        let max_frequency_path = path.join("max_freq");
-                        let mut max_frequency_file = File::open(&max_frequency_path)
-                            .context(format!("Failed to open {}", max_frequency_path.display()))?;
+                let max_frequency_path = path.join("max_freq");
+                let mut max_frequency_file = File::open(&max_frequency_path)
+                    .context(format!("Failed to open {}", max_frequency_path.display()))?;
 
-                        let mut buffer = String::new();
-                        max_frequency_file.read_to_string(&mut buffer)?;
-                        let max_frequency = buffer.trim().parse::<usize>()? / 1_000_000;
+                let mut buffer = String::new();
+                max_frequency_file.read_to_string(&mut buffer)?;
+                let max_frequency = buffer.trim().parse::<usize>()? / 1_000_000;
 
-                        return Ok(Some(GPUFrequency {
-                            current_frequency_file,
-                            max_frequency_file,
-                            current_frequency,
-                            max_frequency,
-                        }));
-                    }
-                }
+                return Ok(Some(GPUFrequency {
+                    current_frequency_file,
+                    max_frequency_file,
+                    current_frequency,
+                    max_frequency,
+                }));
             }
         }
 
@@ -163,16 +159,16 @@ impl GPU {
     }
 
     pub fn refresh(&mut self) {
-        if let Some(load) = &mut self.load {
-            if let Err(e) = load.refresh() {
-                error!("{}", e);
-            }
+        if let Some(load) = &mut self.load
+            && let Err(e) = load.refresh()
+        {
+            error!("{}", e);
         }
 
-        if let Some(frequency) = &mut self.frequency {
-            if let Err(e) = frequency.refresh() {
-                error!("{}", e);
-            }
+        if let Some(frequency) = &mut self.frequency
+            && let Err(e) = frequency.refresh()
+        {
+            error!("{}", e);
         }
     }
 

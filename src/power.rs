@@ -158,55 +158,51 @@ impl Power {
 
             let hwmon_name = fs::read_to_string(entry_path.join("name"))?;
 
-            if hwmon_name.trim() == "ina3221" {
-                if let Ok(power_entries) = fs::read_dir(&entry_path) {
-                    for f in power_entries.flatten() {
-                        let path = f.path();
-                        if let Some(file_name) = path.file_name() {
-                            if let Some(name) = file_name.to_str() {
-                                if let Some(captures) = channel_regex.captures(name) {
-                                    if let Some(channel_index) = captures.get(1) {
-                                        let channel_index = channel_index.as_str();
+            if hwmon_name.trim() == "ina3221"
+                && let Ok(power_entries) = fs::read_dir(&entry_path)
+            {
+                for f in power_entries.flatten() {
+                    let path = f.path();
+                    if let Some(file_name) = path.file_name()
+                        && let Some(name) = file_name.to_str()
+                        && let Some(captures) = channel_regex.captures(name)
+                        && let Some(channel_index) = captures.get(1)
+                    {
+                        let channel_index = channel_index.as_str();
 
-                                        let channel_name = match fs::read_to_string(&path) {
-                                            Ok(v) => v,
-                                            Err(_) => continue,
-                                        };
+                        let channel_name = match fs::read_to_string(&path) {
+                            Ok(v) => v,
+                            Err(_) => continue,
+                        };
 
-                                        if !&entry_path
-                                            .join(format!("curr{}_input", channel_index))
-                                            .exists()
-                                        {
-                                            continue;
-                                        }
-
-                                        let current_path = &entry_path
-                                            .join(format!("curr{}_input", channel_index));
-                                        let mut current_file = File::open(current_path)?;
-                                        let mut buffer = String::new();
-                                        current_file.read_to_string(&mut buffer)?;
-                                        let current = buffer.trim().parse::<f32>()?;
-
-                                        let voltage_path =
-                                            &entry_path.join(format!("in{}_input", channel_index));
-
-                                        let mut voltage_file = File::open(voltage_path)?;
-                                        let mut buffer = String::new();
-                                        voltage_file.read_to_string(&mut buffer)?;
-                                        let voltage = buffer.trim().parse::<f32>()?;
-
-                                        let channel = Channel {
-                                            current_file,
-                                            voltage_file,
-                                            name: channel_name,
-                                            power: (current * voltage / 1000.0).round(),
-                                        };
-
-                                        channels.push(channel);
-                                    }
-                                }
-                            }
+                        if !&entry_path
+                            .join(format!("curr{}_input", channel_index))
+                            .exists()
+                        {
+                            continue;
                         }
+
+                        let current_path = &entry_path.join(format!("curr{}_input", channel_index));
+                        let mut current_file = File::open(current_path)?;
+                        let mut buffer = String::new();
+                        current_file.read_to_string(&mut buffer)?;
+                        let current = buffer.trim().parse::<f32>()?;
+
+                        let voltage_path = &entry_path.join(format!("in{}_input", channel_index));
+
+                        let mut voltage_file = File::open(voltage_path)?;
+                        let mut buffer = String::new();
+                        voltage_file.read_to_string(&mut buffer)?;
+                        let voltage = buffer.trim().parse::<f32>()?;
+
+                        let channel = Channel {
+                            current_file,
+                            voltage_file,
+                            name: channel_name,
+                            power: (current * voltage / 1000.0).round(),
+                        };
+
+                        channels.push(channel);
                     }
                 }
             }
@@ -235,10 +231,10 @@ impl Power {
     }
 
     pub fn refresh(&mut self) {
-        if let Some(nvpmode) = &mut self.nvpmode {
-            if let Err(e) = nvpmode.refresh() {
-                error!("{}", e);
-            }
+        if let Some(nvpmode) = &mut self.nvpmode
+            && let Err(e) = nvpmode.refresh()
+        {
+            error!("{}", e);
         }
 
         for channel in &mut self.channels {

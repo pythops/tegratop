@@ -161,15 +161,15 @@ impl Fan {
     }
 
     pub fn refresh(&mut self) {
-        if let Some(rpm) = &mut self.rpm {
-            if let Err(e) = rpm.refresh() {
-                error!("{}", e);
-            }
+        if let Some(rpm) = &mut self.rpm
+            && let Err(e) = rpm.refresh()
+        {
+            error!("{}", e);
         }
-        if let Some(profile) = &mut self.profile {
-            if let Err(e) = profile.refresh() {
-                error!("{}", e);
-            }
+        if let Some(profile) = &mut self.profile
+            && let Err(e) = profile.refresh()
+        {
+            error!("{}", e);
         }
     }
 
